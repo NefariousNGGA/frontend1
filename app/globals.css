@@ -3,5 +3,33 @@
 @tailwind utilities;
 
 body {
-  @apply bg-zinc-900 text-zinc-100;
+  @apply bg-neutral-950 text-neutral-100 font-sans transition-colors duration-300;
+}
+
+.prose {
+  @apply max-w-none;
+}
+
+.card {
+  @apply bg-neutral-900 rounded-lg p-6 shadow-md transition transform hover:-translate-y-1 hover:shadow-lg;
+}
+
+.button {
+  @apply bg-accent text-neutral-950 px-4 py-2 rounded hover:brightness-110 transition;
+}
+
+input, textarea {
+  @apply w-full p-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-accent transition;
+}
+
+.light-mode {
+  @apply bg-paper text-neutral-950;
+}
+
+.light-mode .card {
+  @apply bg-white shadow-lg;
+}
+
+.light-mode input, .light-mode textarea {
+  @apply bg-white border-gray-300 text-neutral-950;
 }
