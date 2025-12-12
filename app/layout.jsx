@@ -1,5 +1,6 @@
 export const metadata = {
-  title: "Admin Panel"
+  title: "Unsaid Thoughts",
+  description: "Magic ba 'yan, nanlalambot ako sa’yo ah."
 };
 
 export default function RootLayout({ children }) {
