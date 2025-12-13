@@ -4,6 +4,7 @@ import CommentForm from "../../../components/CommentForm";
 import { api } from "../../../lib/api";
 
 export default async function Thought({ params }) {
+  // server-side fetch
   const t = await api("/thoughts/" + params.id);
 
   return (
