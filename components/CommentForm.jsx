@@ -5,14 +5,21 @@ export default function CommentForm({ thoughtId }) {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
 
-    await fetch(process.env.NEXT_PUBLIC_API_URL + "/comments/" + thoughtId, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
+    try {
+      const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/comments/" + thoughtId, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
-    e.target.reset();
-    location.reload();
+      if (!res.ok) throw new Error(`Comment failed: ${res.status}`);
+
+      e.target.reset();
+      location.reload();
+    } catch (err) {
+      console.error("Comment error:", err);
+      alert("Failed to post comment: " + err.message);
+    }
   }
 
   return (
