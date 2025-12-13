@@ -5,14 +5,21 @@ export default function Submit() {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
 
-    await fetch(process.env.NEXT_PUBLIC_API_URL + "/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
+    try {
+      const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
-    alert("Submitted! Awaiting approval.");
-    e.target.reset();
+      if (!res.ok) throw new Error(`Submit failed: ${res.status}`);
+
+      alert("Submitted! Awaiting approval.");
+      e.target.reset();
+    } catch (err) {
+      console.error("Submit error:", err);
+      alert("Failed to submit: " + err.message);
+    }
   }
 
   return (
