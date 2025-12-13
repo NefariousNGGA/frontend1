@@ -20,11 +20,7 @@ export default function Submit() {
       <h1 className="text-2xl font-serif text-accent mb-4">Submit a Thought</h1>
 
       <form onSubmit={submit} className="space-y-4">
-        <input
-          name="author"
-          placeholder="Your name (optional)"
-          className="input"
-        />
+        <input name="author" placeholder="Your name (optional)" className="input" />
 
         <textarea
           name="content"
