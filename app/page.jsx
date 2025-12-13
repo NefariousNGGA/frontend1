@@ -1,14 +1,23 @@
 import { api } from "../lib/api";
 
 export default async function Home() {
-  // server-side fetch
-  const thoughts = await api("/thoughts");
+  let thoughts = [];
+  let error = null;
+
+  try {
+    thoughts = await api("/thoughts", {}, true); // server fetch
+  } catch (err) {
+    console.error("Home page fetch error:", err);
+    error = err.message;
+  }
+
+  if (error) return <div className="max-w-2xl mx-auto p-6">Error: {error}</div>;
 
   return (
     <main className="max-w-2xl mx-auto p-6 space-y-6">
       <h1 className="text-4xl font-serif text-accent mb-6">Unsaid Thoughts</h1>
 
-      {thoughts.map(t => (
+      {thoughts.map((t) => (
         <a key={t.id} href={`/thought/${t.id}`} className="card block">
           <p className="whitespace-pre-wrap opacity-80">{t.content.slice(0, 140)}…</p>
         </a>
